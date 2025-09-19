@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Utils\Enum;
+
+enum SalonGenre: string
+{
+    case GENRE_MALE = 'M';
+    case GENRE_FEMALE = 'F';
+
+    public function label(): string
+    {
+        return match($this) {
+            self::GENRE_MALE   => 'Male',
+            self::GENRE_FEMALE => 'Female',
+        };
+    }
+
+    public static function choices(): array
+    {
+        return [
+            self::GENRE_MALE->value   => self::GENRE_MALE->label(),
+            self::GENRE_FEMALE->value => self::GENRE_FEMALE->label(),
+        ];
+    }
+}

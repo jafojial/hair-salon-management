@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Utils\Enum;
+
+enum ReviewStatus: string
+{
+    case PENDING = 'PENDING';
+    case APPROVED = 'APPROVED';
+    case REJECTED = 'REJECTED';
+
+    public function label(): string
+    {
+        return match($this) {
+            self::PENDING   => 'Pending confirmation',
+            self::APPROVED => 'Confirmed',
+            self::REJECTED => 'Rejected',
+        };
+    }
+
+    public static function choices(): array
+    {
+        return [
+            self::PENDING->value   => self::PENDING->label(),
+            self::APPROVED->value => self::APPROVED->label(),
+            self::REJECTED->value => self::REJECTED->label(),
+        ];
+    }
+}
+
+// abstract class ReviewStatus
+// {
+//     public const STATUS_PENDING = 'PENDING';
+//     public const STATUS_APPROVED = 'APPROVED';
+//     public const STATUS_REJECTED = 'REJECTED';
+
+//     /** @var array user friendly named type */
+//     protected static $statusName = [
+//         self::STATUS_PENDING   => 'Pending',
+//         self::STATUS_APPROVED    => 'Approved',
+//         self::STATUS_REJECTED => 'Rejected',
+//     ];
+
+//     /**
+//      * @param  string $statusShortName
+//      * @return string
+//      */
+//     public static function getStatusName($statusShortName)
+//     {
+//         if (!isset(static::$statusName[$statusShortName])) {
+//             return "Unknown status ($statusShortName)";
+//         }
+
+//         return static::$statusName[$statusShortName];
+//     }
+
+//     /**
+//      * @return array<string>
+//      */
+//     public static function getAvailableStatus()
+//     {
+//         return [
+//             self::STATUS_PENDING,
+//             self::STATUS_APPROVED,
+//             self::STATUS_REJECTED,
+//         ];
+//     }
+
+//     /**
+//      * @return array<string, string>
+//      */
+//     public static function getAvailableStatusWithLabel()
+//     {
+//         return [
+//             static::$statusName[self::STATUS_PENDING] => self::STATUS_PENDING,
+//             static::$statusName[self::STATUS_APPROVED] => self::STATUS_APPROVED,
+//             static::$statusName[self::STATUS_REJECTED] => self::STATUS_REJECTED,
+//         ];
+//     }
+// }

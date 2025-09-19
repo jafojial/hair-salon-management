@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Utils\Enum;
+
+enum BookingStatus: string
+{
+    case PENDING = 'PENDING';
+    case CONFIRMED = 'CONFIRMED';
+    case CANCELLED = 'CANCELLED';
+
+    public function label(): string
+    {
+        return match($this) {
+            self::PENDING   => 'Pending confirmation',
+            self::CONFIRMED => 'Confirmed',
+            self::CANCELLED => 'Cancelled',
+        };
+    }
+
+    public static function choices(): array
+    {
+        return [
+            self::PENDING->value   => self::PENDING->label(),
+            self::CONFIRMED->value => self::CONFIRMED->label(),
+            self::CANCELLED->value => self::CANCELLED->label(),
+        ];
+    }
+}
+
+// class BookingStatus
+// {
+//     public const STATUS_PENDING = 'PENDING';
+//     public const STATUS_CONFIRMED = 'CONFIRMED';
+//     public const STATUS_CANCELLED = 'CANCELLED';
+
+//     /** @var array user friendly named type */
+//     protected static $statusName = [
+//         self::STATUS_PENDING   => 'Pending',
+//         self::STATUS_CONFIRMED    => 'Confirmed',
+//         self::STATUS_CANCELLED => 'Cancelled',
+//     ];
+
+//     /**
+//      * @param  string $statusShortName
+//      * @return string
+//      */
+//     public static function getStatusName($statusShortName)
+//     {
+//         if (!isset(static::$statusName[$statusShortName])) {
+//             return "Unknown status ($statusShortName)";
+//         }
+
+//         return static::$statusName[$statusShortName];
+//     }
+
+//     /**
+//      * @return array<string>
+//      */
+//     public static function getAvailableStatus()
+//     {
+//         return [
+//             self::STATUS_PENDING,
+//             self::STATUS_CONFIRMED,
+//             self::STATUS_CANCELLED,
+//         ];
+//     }
+
+//     /**
+//      * @return array<string, string>
+//      */
+//     public static function getAvailableStatusWithLabel()
+//     {
+//         return [
+//             static::$statusName[self::STATUS_PENDING] => self::STATUS_PENDING,
+//             static::$statusName[self::STATUS_CONFIRMED] => self::STATUS_CONFIRMED,
+//             static::$statusName[self::STATUS_CANCELLED] => self::STATUS_CANCELLED,
+//         ];
+//     }
+// }
