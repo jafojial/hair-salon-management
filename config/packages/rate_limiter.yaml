@@ -1,0 +1,18 @@
+framework:
+    rate_limiter:
+        auth_limiter:
+            policy: token_bucket
+            limit: 5
+            rate: { interval: '1 minute', amount: 1 }
+
+        # Fixed Window Policy
+        anonymous_limiter:
+            policy: 'fixed_window'
+            limit: 100
+            interval: '60 minutes' # 100 requests per 60 minutes, counter resets after 60 minutes
+
+        # Token Bucket Policy
+        upload_limiter:
+            policy: 'token_bucket'
+            limit: 5000 # Max tokens in the bucket
+            rate: { interval: '15 minutes', amount: 500 } # Add 500 tokens every 15 minutes
